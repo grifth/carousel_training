@@ -39,7 +39,7 @@
   </div>
 </div>
   <div id="button">
-    <button class="red">第1张</button>
+    <button>第1张</button>
     <button>第2张</button>
     <button>第3张</button>
   </div>
@@ -62,5 +62,28 @@
               .siblings('.red').removeClass('red')
         })
   }
+
+  var n = 0
+  var size = allbtn.length
+
+activeButtonAndPlay(allbtn)
+function activeButtonAndPlay($button){
+  $button.eq(n%size).trigger('click')
+        .addClass('red')
+        .siblings('.red').removeClass('red')
+  }
+function setTimer(){
+  return setInterval(()=>{
+    n+=1
+    activeButtonAndPlay(allbtn)
+  },1000)
+}
+var timer = setTimer()
+$('.window').on('mouseenter',function(){
+  window.clearInterval(timer)
+})
+$('.window').on('mouseleave',function(){
+  timer = setTimer()
+})
 </script>
 </html>
