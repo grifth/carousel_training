@@ -52,11 +52,21 @@ for(let i =0 ;i<allbtn.length;i++){
   $(allbtn[i]).on('click',function(x){
     var index = $(x.currentTarget).index()
     var p = - index * 600
-    console.log(p)
     $('.carousel').css({
-      transform:`translate(${p}px)`
+      transform:`translateX(${p}px)`
     })
+    activeButton(allbtn.eq(index))
   })
 }
+
+var n = 0
+var size = allbtn.length
+
+function activeButton($button){
+  $button.addClass('red')
+        .siblings('.red').removeClass('red')
+}
+
+activeButton($(allbtn[n%size]))
 </script>
 </html>
