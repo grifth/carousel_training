@@ -48,42 +48,14 @@
 </script>
 <script type="text/javascript">
 var allbtn = $('#button>button')
-for(let i =0 ;i<allbtn.length;i++){
-  $(allbtn[i]).on('click',function(x){
+for(let i=0;i<allbtn.length;i++){
+  $(allbtn[i]).on('click',(x)=>{
     var index = $(x.currentTarget).index()
     var p = - index * 600
     $('.carousel').css({
       transform:`translateX(${p}px)`
     })
-    allbtn.eq(index).addClass('red')
-             .siblings('.red').removeClass('red')
   })
 }
-
-var n = 0
-var size = allbtn.length
-
-allbtn.eq(n%size).trigger('click')
-      .addClass('red')
-      .siblings('.red').removeClass('red')
-var timer = setInterval(()=>{
-    n++;
-    allbtn.eq(n%size).trigger('click')
-                    .addClass('red')
-                    .siblings('.red').removeClass('red')
-},1000)
-
-$('.window').on('mouseenter',function(){
-  clearInterval(timer)
-})
-
-$('.window').on('mouseleave',function(){
-  timer = setInterval(()=>{
-      n++;
-      allbtn.eq(n%size).trigger('click')
-                      .addClass('red')
-                      .siblings('.red').removeClass('red')
-  },1000)
-})
 </script>
 </html>
