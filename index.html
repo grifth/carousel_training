@@ -24,6 +24,10 @@
         width: 600px;
         height: 400px;
       }
+
+      .red{
+        color: red;
+      }
   </style>
 </head>
 <body>
@@ -34,27 +38,29 @@
     <img src="3.jpg" alt="">
   </div>
 </div>
-<button id="p1" class="red">第1张</button>
-<button id="p2">第2张</button>
-<button id="p3">第3张</button>
+  <div id="button">
+    <button class="red">第1张</button>
+    <button>第2张</button>
+    <button>第3张</button>
+  </div>
 </body>
 <script type="text/javascript" src="./node_modules/jQuery/tmp/jquery.js">
 </script>
 <script type="text/javascript">
-$('#p1').on('click',()=>{
-  $('.carousel').css({
-    transform:'translateX(0)'
-  })
-})
-$('#p2').on('click',()=>{
-  $('.carousel').css({
-    transform:'translateX(-600px)'
-  })
-})
-$('#p3').on('click',()=>{
-  $('.carousel').css({
-    transform:'translateX(-1200px)'
-  })
-})
+  var allbtn = $('#button>button')
+  for(let i =0;i<allbtn.length;i++){
+        $(allbtn[i]).on('click',function(x){
+          var index = $(x.currentTarget).index()
+          var p = - index * 600
+          $('.carousel').css({
+            transform:`translate(${p}px)`
+          })
+
+        n = index
+        allbtn.eq(n)
+              .addClass('red')
+              .siblings('.red').removeClass('red')
+        })
+  }
 </script>
 </html>
