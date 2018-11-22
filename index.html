@@ -55,18 +55,35 @@ for(let i =0 ;i<allbtn.length;i++){
     $('.carousel').css({
       transform:`translateX(${p}px)`
     })
-    activeButton(allbtn.eq(index))
+    allbtn.eq(index).addClass('red')
+             .siblings('.red').removeClass('red')
   })
 }
 
 var n = 0
 var size = allbtn.length
 
-function activeButton($button){
-  $button.addClass('red')
-        .siblings('.red').removeClass('red')
-}
+allbtn.eq(n%size).trigger('click')
+      .addClass('red')
+      .siblings('.red').removeClass('red')
+var timer = setInterval(()=>{
+    n++;
+    allbtn.eq(n%size).trigger('click')
+                    .addClass('red')
+                    .siblings('.red').removeClass('red')
+},1000)
 
-activeButton($(allbtn[n%size]))
+$('.window').on('mouseenter',function(){
+  clearInterval(timer)
+})
+
+$('.window').on('mouseleave',function(){
+  timer = setInterval(()=>{
+      n++;
+      allbtn.eq(n%size).trigger('click')
+                      .addClass('red')
+                      .siblings('.red').removeClass('red')
+  },1000)
+})
 </script>
 </html>
