@@ -47,43 +47,16 @@
 <script type="text/javascript" src="./node_modules/jQuery/tmp/jquery.js">
 </script>
 <script type="text/javascript">
-  var allbtn = $('#button>button')
-  for(let i =0;i<allbtn.length;i++){
-        $(allbtn[i]).on('click',function(x){
-          var index = $(x.currentTarget).index()
-          var p = - index * 600
-          $('.carousel').css({
-            transform:`translate(${p}px)`
-          })
-
-        n = index
-        allbtn.eq(n)
-              .addClass('red')
-              .siblings('.red').removeClass('red')
-        })
-  }
-
-  var n = 0
-  var size = allbtn.length
-
-activeButtonAndPlay(allbtn)
-function activeButtonAndPlay($button){
-  $button.eq(n%size).trigger('click')
-        .addClass('red')
-        .siblings('.red').removeClass('red')
-  }
-function setTimer(){
-  return setInterval(()=>{
-    n+=1
-    activeButtonAndPlay(allbtn)
-  },1000)
+var allbtn = $('#button>button')
+for(let i =0 ;i<allbtn.length;i++){
+  $(allbtn[i]).on('click',function(x){
+    var index = $(x.currentTarget).index()
+    var p = - index * 600
+    console.log(p)
+    $('.carousel').css({
+      transform:`translate(${p}px)`
+    })
+  })
 }
-var timer = setTimer()
-$('.window').on('mouseenter',function(){
-  window.clearInterval(timer)
-})
-$('.window').on('mouseleave',function(){
-  timer = setTimer()
-})
 </script>
 </html>
