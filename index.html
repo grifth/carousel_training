@@ -6,84 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style media="screen">
-        .window{
-          width: 600px;
-          height: 400px;
-          overflow: hidden;
-        }
 
-        .carousel{
-          transition: transform 0.5s;
-          display: -webkit-flex;
-          display: -ms-flex;
-          display: flex;
-          align-items: flex-start;
-        }
-
-      .carousel>img{
-        width: 600px;
-        height: 400px;
-      }
-
-      .red{
-        color: red;
-      }
   </style>
 </head>
 <body>
-<div class="window">
-  <div class="carousel">
-    <img src="1.jpg" alt="">
-    <img src="2.jpg" alt="">
-    <img src="3.jpg" alt="">
-  </div>
-</div>
-  <div id="button">
-    <button>第1张</button>
-    <button>第2张</button>
-    <button>第3张</button>
-  </div>
+
 </body>
 <script type="text/javascript" src="./node_modules/jQuery/tmp/jquery.js">
 </script>
 <script type="text/javascript">
-var allbtn = $('#button>button')
-for(let i =0 ;i<allbtn.length;i++){
-  $(allbtn[i]).on('click',function(x){
-    var index = $(x.currentTarget).index()
-    var p = - index * 600
-    $('.carousel').css({
-      transform:`translateX(${p}px)`
-    })
-    allbtn.eq(index).addClass('red')
-             .siblings('.red').removeClass('red')
-  })
-}
 
-var n = 0
-var size = allbtn.length
-
-allbtn.eq(n%size).trigger('click')
-      .addClass('red')
-      .siblings('.red').removeClass('red')
-var timer = setInterval(()=>{
-    n++;
-    allbtn.eq(n%size).trigger('click')
-                    .addClass('red')
-                    .siblings('.red').removeClass('red')
-},1000)
-
-$('.window').on('mouseenter',function(){
-  clearInterval(timer)
-})
-
-$('.window').on('mouseleave',function(){
-  timer = setInterval(()=>{
-      n++;
-      allbtn.eq(n%size).trigger('click')
-                      .addClass('red')
-                      .siblings('.red').removeClass('red')
-  },1000)
-})
 </script>
 </html>
