@@ -6,28 +6,80 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style media="screen">
-
+        .window{
+          width: 600px;
+          height: 400px;
+          overflow: hidden;
+        }
+        .window>.images{
+          display: -webkit-flex;
+          display: -ms-flex;
+          display: flex;
+          align-items: flex-start;
+          transition: transform .3s
+        }
+        .window>.images>img{
+          width: 600px;
+          height: 400px;
+        }
+        .red{
+          color: red;
+        }
   </style>
 </head>
 <body>
-
+  <div class="window">
+    <div class="images">
+      <img src="1.jpg" alt="">
+      <img src="2.jpg" alt="">
+      <img src="3.jpg" alt="">
+    </div>
+  </div>
+  <div class="buttons">
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+  </div>
 </body>
 <script type="text/javascript" src="./node_modules/jQuery/tmp/jquery.js">
 </script>
 <script type="text/javascript">
-<<<<<<< HEAD
-
-=======
-var allbtn = $('#button>button')
-for(let i=0;i<allbtn.length;i++){
-  $(allbtn[i]).on('click',(x)=>{
+var buttons = $('.buttons>button')
+for(let i =0;i<buttons.length;i++){
+  $(buttons[i]).on('click',(x)=>{
     var index = $(x.currentTarget).index()
     var p = - index * 600
-    $('.carousel').css({
-      transform:`translateX(${p}px)`
+    $('.images').css({
+      transform:`translate(${p}px)`
     })
   })
 }
->>>>>>> da377e7b7ef677bfef8696bd91b1af17937ea63c
+var n = 0
+var size = buttons.length
+
+playAndActive($(buttons[0%size]))
+// $(buttons[0%size]).trigger('click')
+//                   .addClass('red')
+//                   .siblings('.red').removeClass('red')
+function playAndActive($button){
+  $($button).trigger('click')
+                    .addClass('red')
+                    .siblings('.red').removeClass('red')
+}
+function setTimer(){
+  return setInterval(()=>{
+        n++;
+        playAndActive($(buttons[n%size]))
+  },1000)
+}
+var timer  = setTimer()
+
+$('.window').on('mouseenter',()=>{
+  clearInterval(timer)
+})
+
+$('.window').on('mouseleave',()=>{
+  timer  = setTimer()
+})
 </script>
 </html>
