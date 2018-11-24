@@ -6,25 +6,25 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style media="screen">
-        .window{
-          width: 600px;
-          height: 400px;
-          overflow: hidden;
-        }
-        .window>.images{
-          display: -webkit-flex;
-          display: -ms-flex;
-          display: flex;
-          align-items: flex-start;
-          transition: transform .3s
-        }
-        .window>.images>img{
-          width: 600px;
-          height: 400px;
-        }
-        .red{
-          color: red;
-        }
+      .window>.images>img{
+        width: 600px;
+        height: 400px;
+      }
+      .window .images{
+        display: -webkit-flex;
+        display: -ms-flex;
+        display: flex;
+        align-items: flex-start;
+        transition: all 0.3s;
+      }
+      .window{
+        overflow: hidden;
+        width: 600px;
+        height: 400px;
+      }
+      .red{
+        color:red;
+      }
   </style>
 </head>
 <body>
@@ -36,7 +36,7 @@
     </div>
   </div>
   <div class="buttons">
-    <button>1</button>
+    <button class="red">1</button>
     <button>2</button>
     <button>3</button>
   </div>
@@ -44,42 +44,34 @@
 <script type="text/javascript" src="./node_modules/jQuery/tmp/jquery.js">
 </script>
 <script type="text/javascript">
-var buttons = $('.buttons>button')
-for(let i =0;i<buttons.length;i++){
-  $(buttons[i]).on('click',(x)=>{
-    var index = $(x.currentTarget).index()
+var allbuttons = $('.buttons>button')
+for(let i = 0;i<allbuttons.length;i++){
+  $(allbuttons[i]).on('click',(e)=>{
+    var index = $(e.currentTarget).index()
     var p = - index * 600
     $('.images').css({
-      transform:`translate(${p}px)`
+      transform:`translateX(${p}px)`
     })
+    $(e.currentTarget).addClass('red')
+                      .siblings().removeClass()
   })
 }
-var n = 0
-var size = buttons.length
-
-playAndActive($(buttons[0%size]))
-// $(buttons[0%size]).trigger('click')
-//                   .addClass('red')
-//                   .siblings('.red').removeClass('red')
-function playAndActive($button){
-  $($button).trigger('click')
-                    .addClass('red')
-                    .siblings('.red').removeClass('red')
-}
-function setTimer(){
-  return setInterval(()=>{
-        n++;
-        playAndActive($(buttons[n%size]))
-  },1000)
-}
-var timer  = setTimer()
-
+let n = 1
+let size = allbuttons.length
+var timer
+ setTimer()
 $('.window').on('mouseenter',()=>{
   clearInterval(timer)
 })
-
-$('.window').on('mouseleave',()=>{
-  timer  = setTimer()
+$('.window').on('mouseenter',()=>{
+  setTimer()
 })
+
+function setTimer(){
+  return timer = setInterval(()=>{
+    allbuttons.eq(n%size).trigger('click')
+    n++
+  },1000)
+}
 </script>
 </html>
